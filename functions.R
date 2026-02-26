@@ -31,4 +31,4 @@ expected_income_change <- function(odds,wtp_odds,stake,tax_rate,loss_deduction_p
     return(implied_probability(wtp_odds)*stake*odds/100*(100-tax_rate)/100-((1-implied_probability(wtp_odds))*(stake+(100-loss_deduction_percent)/100*stake*tax_rate/100)))}
   else{
     return(NA)}}
-#assuming bettor will pay taxes on 10 percent of losses
+#does not apply when outcome of bet could flip bettor from profitable to unprofitable for year, or vice versa
