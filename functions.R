@@ -17,18 +17,18 @@ odds <- function(probability){
     return(-100/(1/probability-1))}
   else{
     return(NA)}}
-expected_winnings <- function(odds,wtp_odds,stake){
+expected_winnings <- function(odds,wtp_odds,push_probability,stake){
   if (odds < -100){
-    return(implied_probability(wtp_odds)*stake*-100/odds-(1-implied_probability(wtp_odds))*stake)}
+    return((implied_probability(wtp_odds)*stake*-100/odds-(1-implied_probability(wtp_odds))*stake)*(1-push_probability))}
   if (odds >= 100){
-    return(implied_probability(wtp_odds)*stake*odds/100-(1-implied_probability(wtp_odds))*stake)}
+    return((implied_probability(wtp_odds)*stake*odds/100-(1-implied_probability(wtp_odds))*stake)*(1-push_probability))}
   else{
     return(NA)}}
-expected_income_change <- function(odds,wtp_odds,stake,tax_rate,loss_deduction_percent){
+expected_income_change <- function(odds,wtp_odds,push_probability,stake,tax_rate,loss_deduction_percent){
   if (odds < -100){
-    return((implied_probability(wtp_odds)*stake*-100/odds-(1-implied_probability(wtp_odds))*stake)*(100-tax_rate)/100-(1-implied_probability(wtp_odds))*stake*(100-loss_deduction_percent)/100*tax_rate/100)}
+    return(((implied_probability(wtp_odds)*stake*-100/odds-(1-implied_probability(wtp_odds))*stake)*(100-tax_rate)/100-(1-implied_probability(wtp_odds))*stake*(100-loss_deduction_percent)/100*tax_rate/100)*(1-push_probability))}
   if (odds >= 100){
-    return((implied_probability(wtp_odds)*stake*odds/100-(1-implied_probability(wtp_odds))*stake)*(100-tax_rate)/100-(1-implied_probability(wtp_odds))*stake*(100-loss_deduction_percent)/100*tax_rate/100)}
+    return(((implied_probability(wtp_odds)*stake*odds/100-(1-implied_probability(wtp_odds))*stake)*(100-tax_rate)/100-(1-implied_probability(wtp_odds))*stake*(100-loss_deduction_percent)/100*tax_rate/100)*(1-push_probability))}
   else{
     return(NA)}}
-#assuming bettor would have to pay taxes if year were to end before or after bet
+#assuming paying taxes on betting income
